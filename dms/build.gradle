@@ -1,0 +1,74 @@
+
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '1.2.4'
+}
+configurations {
+
+    compile.exclude module: 'slf4j-log4j12'
+//    all*.exclude group: 'org.gradle.test.excludes', module: 'reports'
+//    all*.exclude module: 'slf4j-log4j12'
+}
+
+dependencies {
+    compile project(":common")
+
+    compile "org.glassfish.jersey.media:jersey-media-json-jackson:2.22"
+
+    compile libs.vertx.core
+    compile libs.vertx.web
+    compile libs.vertx.rxjava
+    compile libs.vertx.kafka
+
+    compile libs.jersey_rx_client
+
+    compile libs.cassandra.driver
+    compile libs.cassandra.driver_mapping
+    compile libs.cassandra.all
+
+    compile libs.guava
+
+    compile libs.bouncycastle
+
+    testCompile libs.vertx.test
+    testCompile libs.test.junit
+    testCompile libs.test.cassandra_unit
+
+}
+
+
+shadowJar {
+    classifier = 'fat'
+    manifest {
+        attributes 'Main-Class': 'com.dms.Client'
+    }
+    mergeServiceFiles {
+        include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+    }
+
+
+}
+
+// integration tests configuration
+configurations {
+    itestCompile.extendsFrom testCompile
+    itestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+    itestCompile libs.debezium.core, libs.debezium.without
+    itestCompile libs.debezium.tests, libs.debezium.without
+}
+
+sourceSets {
+    itest {
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+        java.srcDir file('src/itest/java')
+    }
+}
+
+task itest(type: Test) {
+    testClassesDir = sourceSets.itest.output.classesDir
+    classpath = sourceSets.itest.runtimeClasspath
+}

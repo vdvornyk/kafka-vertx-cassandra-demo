@@ -1,0 +1,13 @@
+//Will be used for utils, common libs, etc...
+dependencies {
+    compile libs.rxjava.core
+    compile libs.vertx.core
+    compile libs.vertx.rxjava
+    compile libs.fst
+
+
+    compile libs.commons.lang
+    compile libs.commons.collections
+
+    testCompile libs.test.junit
+}

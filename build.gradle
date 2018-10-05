@@ -1,0 +1,27 @@
+
+subprojects {
+    apply plugin: "idea"
+    apply plugin: 'java'
+
+    apply from: "$rootDir/gradle/libraries.gradle"
+
+    defaultTasks 'clean', 'build'
+
+    compileJava.options.encoding = 'UTF-8'
+    compileJava.sourceCompatibility = 1.8
+    compileTestJava.sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        maven { url "http://repo.spring.io/libs-snapshot" }
+        flatDir {
+            dirs "$rootDir/gradle/libs"
+        }
+    }
+
+    dependencies {
+        compile libs.logging.slf4j_api
+        compile libs.logging.logback_core
+        compile libs.logging.logback_classic
+    }
+}

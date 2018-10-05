@@ -1,0 +1,20 @@
+replicaCount: 1
+image:
+  repository: 834507743111.dkr.ecr.us-east-2.amazonaws.com/dmsapp
+  tag: latest
+  pullPolicy: Always
+env:
+  - name: "ENV_CASSANDRA_KEYSPACE"
+    value: "dms"
+  - name: "ENV_CASSANDRA_HOST"
+    value: "cassandra-cassandra.cassandra.svc.cluster.local"
+  - name: "ENV_CASSANDRA_PORT"
+    value: "9042"
+  - name: "ENV_CASSANDRA_INIT_QUERY"
+    value: "CREATE KEYSPACE IF NOT EXISTS dms WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 3 };"
+  - name: "ENV_KAFKA_BROKER"
+    value: "kafka-kafka.kafka.svc.cluster.local:9092"
+  - name: "ENV_KAFKA_TRANSACTIONS_TOPIC"
+    value: "com.dms.transactions"
+  - name: "ENV_TRANSACTIONS_GROUP_ID"
+    value: "transactions"

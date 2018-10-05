@@ -1,0 +1,13 @@
+{
+  "id": "0x0815",
+  "payment": {
+    "from": "a7798740-bb6f-4629-85c1-766ef77f4e6d",
+    "to": "8157ccb8-86e7-439f-af6b-beb20117c4bf",
+    "amount" : 10.3,
+    "currency" : "EUR",
+    "createdAt" : "2016-02-12T12:34:33.441+01:00"
+  },
+  "extraData": {
+    "payload": "U2FsdGVkX1+g15tEFs5M9cuiPnMGJ8WVzLZUvNI0Psphmt0fOeUsqZ6V8EPBpkci1/QLEsoKoLGfq+iUQpvmk6I6+QE7Zl/h6pC2lGTWdZ2ro5Yh25ySFWP8KA5FgnXZwZ05wrHxH6EhthHO1Ex6Fw=="
+  }
+}

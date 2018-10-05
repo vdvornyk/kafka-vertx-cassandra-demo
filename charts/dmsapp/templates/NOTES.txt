@@ -1,0 +1,6 @@
+1. Get the application URL by running these commands:
+{{- if .Values.env }}
+{{- range .Values.env }}
+  {{ .name }} {{ .value }}
+{{- end }}
+{{- end }}
